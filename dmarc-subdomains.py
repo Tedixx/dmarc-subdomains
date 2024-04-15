@@ -11,6 +11,8 @@ async def fetch_dmarc_domains(domain):
         browser = await p.chromium.launch()
         page = await browser.new_page()
         await page.goto(f'https://dmarc.live/info/{domain}')
+        await page.click('text="Get All"')
+        await page.wait_for_load_state('networkidle')
         content = await page.content()
         await browser.close()
     
